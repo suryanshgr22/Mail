@@ -1,0 +1,53 @@
+{% extends "mail/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h2 id = "myemail">{{ request.user.email }}</h2>
+
+    <button class="btn btn-sm btn-outline-primary" id="inbox">Inbox</button>
+    <button class="btn btn-sm btn-outline-primary" id="compose">Compose</button>
+    <button class="btn btn-sm btn-outline-primary" id="sent">Sent</button>
+    <button class="btn btn-sm btn-outline-primary" id="archived">Archived</button>
+    <a class="btn btn-sm btn-outline-primary" href="{% url 'logout' %}">Log Out</a>
+    <hr>
+
+    <div id="emails-view">
+
+    </div>
+
+    <div id="compose-view">
+
+        <form id="compose-form">
+            <div class="form-group">
+                From: <input disabled class="form-control" value="{{ request.user.email }}">
+            </div>
+            <div class="form-group">
+                To: <input id="compose-recipients" class="form-control">
+            </div>
+            <div class="form-group">
+                <input class="form-control" id="compose-subject" placeholder="Subject">
+            </div>
+            <textarea class="form-control" id="compose-body" placeholder="Body"></textarea>
+            <input type="submit" id="btn" class="btn btn-primary"/>
+        </form>
+    </div>
+    <div id="emailView">
+        <div id="top">
+            <div class="d-flex flex-row mb-3"><b>From :&nbsp; </b><div id="From"></div></div>
+            <div class="d-flex flex-row mb-3"><b>To :&nbsp; </b><div id="To"></div></div>
+            <div class="d-flex flex-row mb-3"><b>Subject :&nbsp; </b><div id="Subject"></div></div>
+            <div class="d-flex flex-row mb-3"><b>Timestamp :&nbsp; </b><div id="Timestamp"></div></div>
+            <button class="btn btn-sm btn-outline-primary" id="reply">Reply</button>
+            <div id="archieve" style="display: none;"><button class="btn btn-sm btn-outline-primary" id="archbutton"></button></div>
+        </div>
+        <hr>
+        <div id="bottom">
+            <div><b>Body :&nbsp; </b><div id="Body"></div></div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'mail/inbox.js' %}"></script>
+{% endblock %}
